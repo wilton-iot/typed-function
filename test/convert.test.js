@@ -1,9 +1,11 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+var describe = require('tape-compat').describe;
+var it = require('tape-compat').it;
 var assert = require('assert');
-var typed = require('../typed-function');
+var typed = require('typed-function');
 
 describe('convert', function () {
 
-  before(function () {
     typed.conversions = [
       {from: 'boolean', to: 'number', convert: function (x) {return +x;}},
       {from: 'boolean', to: 'string', convert: function (x) {return x + '';}},
@@ -18,12 +20,6 @@ describe('convert', function () {
         fallible: true // TODO: not yet supported
       }
     ];
-  });
-
-  after(function () {
-    // cleanup conversions
-    typed.conversions = [];
-  });
 
   it('should convert a value', function() {
     assert.strictEqual(typed.convert(2, 'string'), '2');
@@ -39,4 +35,9 @@ describe('convert', function () {
   it('should throw an error when no conversion function is found', function() {
     assert.throws(function () {typed.convert(2, 'boolean')}, /Error: Cannot convert from number to boolean/);
   });
+
+    // cleanup conversions
+    typed.conversions = [];
 });
+
+require = requireOrig;});

@@ -1,5 +1,8 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+var describe = require('tape-compat').describe;
+var it = require('tape-compat').it;
 var assert = require('assert');
-var typed = require('../typed-function');
+var typed = require('typed-function');
 
 describe('errors', function () {
   it('should give correct error in case of too few arguments (named function)', function() {
@@ -155,3 +158,5 @@ describe('errors', function () {
     assert.throws(function () {fn2(2, true)}, /TypeError: Unexpected type of argument in function unnamed \(expected: string or number, actual: boolean, index: 1\)/);
   });
 });
+
+require = requireOrig;});

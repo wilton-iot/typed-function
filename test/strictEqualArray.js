@@ -1,3 +1,4 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 var assert = require('assert');
 
 /**
@@ -12,3 +13,5 @@ module.exports = function strictEqualArray(a, b) {
     assert.strictEqual(a[i], b[i]);
   }
 };
+
+require = requireOrig;});

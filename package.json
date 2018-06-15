@@ -37,5 +37,16 @@
   },
   "engines": {
     "node": ">= 6"
+  },
+  "wilton": {
+      "excludes": [
+          "benchmark",
+          "examples",
+          "test",
+          "runAllTests.js"
+      ],
+      "preMinifiedFiles": [
+          "typed-function.js"
+      ]
   }
 }

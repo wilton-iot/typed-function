@@ -1,10 +1,12 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+var describe = require('tape-compat').describe;
+var it = require('tape-compat').it;
 var assert = require('assert');
-var typed = require('../typed-function');
+var typed = require('typed-function');
 var strictEqualArray = require('./strictEqualArray');
 
 describe('conversion', function () {
 
-  before(function () {
     typed.conversions = [
       {from: 'boolean', to: 'number', convert: function (x) {return +x;}},
       {from: 'boolean', to: 'string', convert: function (x) {return x + '';}},
@@ -19,12 +21,6 @@ describe('conversion', function () {
         fallible: true // TODO: not yet supported
       }
     ];
-  });
-
-  after(function () {
-    // cleanup conversions
-    typed.conversions = [];
-  });
 
   it('should add conversions to a function with one argument', function() {
     var fn = typed({
@@ -433,5 +429,9 @@ describe('conversion', function () {
     });
 
   });
+    // cleanup conversions
+    typed.conversions = [];
 
 });
+
+require = requireOrig;});

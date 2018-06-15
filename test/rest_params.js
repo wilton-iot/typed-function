@@ -1,6 +1,11 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+var describe = require('tape-compat').describe;
+var it = require('tape-compat').it;
 var assert = require('assert');
-var typed = require('../typed-function');
+var typed = require('typed-function');
 var strictEqualArray = require('./strictEqualArray');
+var assert_throws_orig = assert.throws;
+assert.throws = function(fun) { assert_throws_orig(fun); }
 
 describe('rest parameters', function () {
 
@@ -198,3 +203,5 @@ describe('rest parameters', function () {
   });
 
 });
+
+require = requireOrig;});
